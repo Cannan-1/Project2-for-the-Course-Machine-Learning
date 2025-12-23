@@ -28,40 +28,6 @@ While the final accuracy ($R^2 \approx 0.88$) is constrained by data quality, th
 
 
 
-## 🧠 Model Architecture
-
-The following diagram illustrates our **Physics-Informed Residual Network**. It processes chemical formulas into physical features, passes them through residual blocks, and is optimized using a physics-constrained loss function.
-
-```mermaid
-graph LR
-    subgraph Data Processing
-    A[Chemical Formula] --> B(Pymatgen Parser)
-    B --> C[Physics Features]
-    C -->|Normalization| D[Input Vector (25+ dim)]
-    end
-
-    subgraph Neural Network (ResNet)
-    D --> E[Input Embedding]
-    E --> F{Residual Block 1}
-    F --> G{Residual Block 2}
-    G --> H{Residual Block 3}
-    H --> I[Output Layer]
-    end
-
-    subgraph Physics-Informed Loss
-    I --> J[Predicted Tc]
-    J --> K((Total Loss))
-    K --> L[MSE Loss]
-    K --> M[Constraint: Tc >= 0]
-    K --> N[Constraint: Tc < 350K]
-    end
-    
-    style A fill:#f9f,stroke:#333,stroke-width:2px
-    style C fill:#bbf,stroke:#333,stroke-width:2px
-    style J fill:#bfb,stroke:#333,stroke-width:2px
-    style K fill:#fbb,stroke:#333,stroke-width:4px
-
-
 
 ## 📂 Project Structure
 
